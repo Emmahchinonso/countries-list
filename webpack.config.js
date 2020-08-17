@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 module.exports = {
 	entry: "./src/index.js",
 	module: {
@@ -5,7 +7,7 @@ module.exports = {
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				use: ["react-hot-loader/webpack", "babel-loader"],
+				use: ["babel-loader"],
 			},
 			{
 				test: /\.css$/,
@@ -28,8 +30,13 @@ module.exports = {
 		path: __dirname + "/dist",
 		publicPath: "/",
 		filename: "bundle.js",
-	},
+  },
+  plugins:[
+    new webpack.HotModuleReplacementPlugin()
+  ],
 	devServer: {
-		contentBase: "./dist",
+    contentBase: "./dist",
+    historyApiFallback: true,
+    hot: true
 	},
 };

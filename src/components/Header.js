@@ -54,7 +54,7 @@ const Header = () => {
       <Nav>
         <Logo to="/">Where in the world?</Logo>
         <Button>
-          <i class="fas fa-moon"></i>
+          <i className="fas fa-moon"></i>
           <Text>Dark Mode</Text>
         </Button>
       </Nav>

@@ -9,6 +9,9 @@ const SelectContainer = styled.div`
 	border-radius: 0.2rem;
   position: relative;
   box-shadow: 1px 2px 5px var(--shadow);
+  @media (max-width: 768px){
+    margin-top: 1rem;
+  }
 `;
 
 const SelectedItem = styled.button`
@@ -73,7 +76,7 @@ const SelectBox = ({ option, setOption, isOpen, setIsOpen, setUrl }) => {
 		<SelectContainer>
 			<SelectedItem onClick={() => setIsOpen(!isOpen)}>
 				{option}
-				<i class="fas fa-chevron-down"></i>
+				<i className="fas fa-chevron-down"></i>
 			</SelectedItem>
 			<SelectItemsWrapper>
 				{isOpen && (

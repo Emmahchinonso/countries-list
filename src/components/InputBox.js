@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const InputWrapper = styled.div`
 	width: 30rem;
 	max-width: 100%;
 	border-radius: 0.2rem;
-  padding: 1rem;
-  box-shadow: 1px 2px 5px var(--shadow);
+	padding: 1rem;
+	box-shadow: 1px 2px 5px var(--shadow);
 	background: var(--elements-background);
 	i {
 		color: var(--input-color);
@@ -16,8 +17,8 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  border: none;
-  width: 80%;
+	border: none;
+	width: 80%;
 	outline: none;
 	font-size: inherit;
 	padding-left: 0.7rem;
@@ -28,14 +29,14 @@ const Input = styled.input`
 `;
 
 const Label = styled.label`
-  width: 100%;
-  display: block;
-  transition: .3s ease;
-  cursor: pointer;
-    &:hover {
-      transform: scale(1.1);
-    }
-`
+	width: 100%;
+	display: block;
+	transition: 0.3s ease;
+	cursor: pointer;
+	&:hover {
+		transform: scale(1.1);
+	}
+`;
 
 const SearchButton = styled.button`
   border: none;
@@ -45,25 +46,30 @@ const SearchButton = styled.button`
 `;
 
 const InputBox = ({ query, setUrl, setQuery }) => {
+  const history = useHistory();
 	return (
 		<InputWrapper>
-			<form onSubmit={(event) => {
-        event.preventDefault();
-        setUrl(`https://restcountries.eu/rest/v2/name/${query}?fullText=true`)
-      }}>
-        <Label htmlFor="input">
-          <SearchButton type="submit">
-            <i class="fas fa-search"></i>
-          </SearchButton>
-          <Input
-            id="input"
-            type="text"
-            value={query}
-            placeholder="Search for a country.."
-            onChange={(event) => setQuery(event.target.value)}
-				/>
-        </Label>
-				
+			<form
+				onSubmit={(event) => {
+          event.preventDefault();
+          history.push(`/searchresult/${query}`);
+					setUrl(
+						`https://restcountries.eu/rest/v2/name/${query}?fullText=true`
+					);
+				}}
+			>
+				<Label htmlFor="input">
+					<SearchButton type="submit">
+						<i className="fas fa-search"></i>
+					</SearchButton>
+					<Input
+						id="input"
+						type="text"
+						value={query}
+						placeholder="Search for a country.."
+						onChange={(event) => setQuery(event.target.value)}
+					/>
+				</Label>
 			</form>
 		</InputWrapper>
 	);

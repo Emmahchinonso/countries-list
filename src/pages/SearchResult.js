@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React from 'react';
 import InputBox from "../components/InputBox";
 import SelectBox from "../components/SelectBox";
 import Loading from "../components/loading";
 import Card from "../components/Card";
-import { Countries, CountriesContainer } from "../components/styled/Countries";
-import { useCountriesApi } from "../hooks/useCountriesApi";
 
 const Container = styled.div`
 	display: flex;
@@ -19,31 +16,35 @@ const Container = styled.div`
 	}
 `;
 
-const Home = () => {
-	const [query, setQuery] = useState("");
 
-	const [countries, isLoading, error, setUrl] = useCountriesApi();
-	// for selectBox
-	const [option, setOption] = useState("Filter by Region");
-	const [isOpen, setIsOpen] = useState(false);
-
+const SearchResult = ({
+ 	query,
+	setUrl,
+	setQuery,
+	option,
+	setOption,
+	isOpen,
+	setIsOpen,
+	isLoading,
+	countries,
+}) => {
+  
+  console.log("Home component rendered");
 	return (
 		<>
-    
 			<Container>
-				<InputBox query={query} setUrl={setUrl} setQuery={setQuery} />
+				<InputBox query={query} setUrl={setUrl} setQuery={setQuery}/>
 				<SelectBox
 					option={option}
 					setOption={setOption}
 					isOpen={isOpen}
 					setIsOpen={setIsOpen}
-					setUrl={setUrl}
+          setUrl={setUrl}
+          
 				/>
 			</Container>
-			
 			<Countries>
 				<CountriesContainer>
-          
 					{isLoading ? (
 						<Loading />
 					) : (

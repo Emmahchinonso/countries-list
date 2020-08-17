@@ -49,10 +49,10 @@ const Bold = styled.span`
 
 const ContentList = styled(ListWrapper)``;
 
-const Card = ({ country, setCountry }) => {
+const Card = ({ country }) => {
 	const { flag, name, population, region, capital } = country;
 	return (
-		<CountryLink to={`/${name}`} onClick={() => setCountry(country)}>
+		<CountryLink to={`/detail/${name}`}>
 			<CardWrapper>
 				<Image src={flag} />
 				<CardContent>
