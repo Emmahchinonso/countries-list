@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-export const useCountriesApi = () => {
-	const [url, setUrl] = useState("https://restcountries.eu/rest/v2/all");
+export const useCountriesApi = (initialUrl) => {
 	const [countries, setCountries] = useState([]);
-	const [error, setError] = useState("");
+	const [error, setError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		setIsLoading(true);
-		fetch(url)
+		fetch(initialUrl)
 			.then((response) => response.json())
 			.then((data) => {
-				setCountries(data);
+        setCountries(data);
 				setIsLoading(false);
 			})
-			.catch((err) => setError(err));
-	}, [url]);
+			.catch((err) => {
+				setIsLoading(false);
+				setError(true);
+			});
+	}, [initialUrl]);
 
-	return [countries, isLoading, error, setUrl];
+	return [countries, isLoading, error];
 };

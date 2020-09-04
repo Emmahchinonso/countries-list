@@ -9,10 +9,10 @@ import ErrorText from "../components/styled/ErrorText";
 import { useCountriesApi } from "../hooks/useCountriesApi";
 import { useParams } from "react-router-dom";
 
-const SearchResult = () => {
-	const { country } = useParams();
+const RegionResult = () => {
+	const { region } = useParams();
 	const [query, setQuery] = useState("");
-	const initialUrl = `https://restcountries.eu/rest/v2/name/${country}?fullText=true`;
+	const initialUrl = `https://restcountries.eu/rest/v2/name/${region}?fullText=true`;
   const [countries, isLoading, error] = useCountriesApi(initialUrl);
 
 	// for selectBox
@@ -46,4 +46,5 @@ const SearchResult = () => {
 		</>
 	);
 };
-export default SearchResult;
+
+export default RegionResult;

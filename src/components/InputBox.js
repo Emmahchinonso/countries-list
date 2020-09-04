@@ -45,17 +45,15 @@ const SearchButton = styled.button`
   cursor: pointer;
 `;
 
-const InputBox = ({ query, setUrl, setQuery }) => {
+const InputBox = ({ query, setQuery }) => {
   const history = useHistory();
 	return (
 		<InputWrapper>
 			<form
 				onSubmit={(event) => {
           event.preventDefault();
-          history.push(`/searchresult/${query}`);
-					setUrl(
-						`https://restcountries.eu/rest/v2/name/${query}?fullText=true`
-					);
+          history.push(`/searchresult/${query.toLowerCase()}`);
+					
 				}}
 			>
 				<Label htmlFor="input">
@@ -67,7 +65,7 @@ const InputBox = ({ query, setUrl, setQuery }) => {
 						type="text"
 						value={query}
 						placeholder="Search for a country.."
-						onChange={(event) => setQuery(event.target.value)}
+						onChange={(event) => setQuery(event.target.value.trim())}
 					/>
 				</Label>
 			</form>

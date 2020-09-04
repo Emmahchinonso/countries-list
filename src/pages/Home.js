@@ -1,49 +1,38 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import InputBox from "../components/InputBox";
 import SelectBox from "../components/SelectBox";
 import Loading from "../components/loading";
 import Card from "../components/Card";
 import { Countries, CountriesContainer } from "../components/styled/Countries";
+import Container from "../components/styled/Container";
+import ErrorText from "../components/styled/ErrorText";
 import { useCountriesApi } from "../hooks/useCountriesApi";
-
-const Container = styled.div`
-	display: flex;
-	justify-content: space-between;
-	width: 95%;
-	padding: 0 1rem;
-	margin: 2.3rem auto;
-	@media (max-width: 768px) {
-		padding: 0 0.5rem;
-		flex-direction: column;
-	}
-`;
 
 const Home = () => {
 	const [query, setQuery] = useState("");
+	const initialUrl = "https://restcountries.eu/rest/v2/all";
 
-	const [countries, isLoading, error, setUrl] = useCountriesApi();
+	const [countries, isLoading, error] = useCountriesApi(initialUrl);
+
 	// for selectBox
 	const [option, setOption] = useState("Filter by Region");
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<>
-    
 			<Container>
-				<InputBox query={query} setUrl={setUrl} setQuery={setQuery} />
+				<InputBox query={query} setQuery={setQuery} />
 				<SelectBox
 					option={option}
 					setOption={setOption}
 					isOpen={isOpen}
 					setIsOpen={setIsOpen}
-					setUrl={setUrl}
 				/>
 			</Container>
-			
+
 			<Countries>
+				{error && <ErrorText>Failed to fetch data...</ErrorText>}
 				<CountriesContainer>
-          
 					{isLoading ? (
 						<Loading />
 					) : (

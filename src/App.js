@@ -5,10 +5,11 @@ import Header from "./components/Header";
 import GlobalStyle from "./components/GlobalStyles";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
+import SearchResult from "./pages/SearchResult";
+import RegionResult from "./pages/RegionResult";
 
 const App = () => {
-	
-	console.log("App rendered");
+
 	return (
 		<Router>
 			<>
@@ -19,11 +20,10 @@ const App = () => {
 
 					<Route
 						path="/searchresult/:country"
-						render={(props) => {
-							console.log("search rendered");
-							return <h1>Search result here</h1>;
-						}}
+						component={SearchResult}
 					/>
+
+          <Route path="/regionSearch/:region" component={RegionResult} />
 
 					<Route exact path="/detail/:country" component={Detail} />
 				</Switch>
