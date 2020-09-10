@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 const RegionResult = () => {
 	const { region } = useParams();
 	const [query, setQuery] = useState("");
-	const initialUrl = `https://restcountries.eu/rest/v2/name/${region}?fullText=true`;
+	const initialUrl = `https://restcountries.eu/rest/v2/region/${region}`;
   const [countries, isLoading, error] = useCountriesApi(initialUrl);
 
 	// for selectBox
