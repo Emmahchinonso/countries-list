@@ -12,5 +12,5 @@ export const CountriesContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 2.5rem;
   gap: 2.5rem;
-  margin-bottom: 1rem;
+  padding-bottom: 2rem;
 `;
