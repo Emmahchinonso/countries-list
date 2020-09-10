@@ -2,16 +2,17 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    --body-background: hsl(0, 0%, 98%);
-    --text-color: hsl(200, 15%, 8%);
-    --input-color: hsl(0, 0%, 52%);
-    --elements-background: hsl(0, 0%, 100%);
-    --shadow: hsl(0, 0%, 90%)
+    --body-background: ${({theme}) => theme.bodyBackground};
+    --text-color: ${({theme}) => theme.text};
+    --input-color: ${({theme}) => theme.input};
+    --elements-background: ${({theme}) => theme.elementBackground};
+    --shadow: ${({theme}) => theme.shadow};
     }
 
   body,html {
     font-family: 'Nunito Sans', sans-serif; 
     background: var(--body-background);
+    color: var(--text-color);
   }
 
   * {

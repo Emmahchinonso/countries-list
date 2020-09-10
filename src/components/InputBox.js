@@ -17,7 +17,8 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
-	border: none;
+  border: none;
+  background: none;
 	width: 80%;
 	outline: none;
 	font-size: inherit;

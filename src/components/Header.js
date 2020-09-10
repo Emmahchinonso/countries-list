@@ -46,16 +46,17 @@ const Text = styled.span`
   font-weight: 600;
   font-size: .9rem;
   margin-left: .3rem;
+  color: ${({theme}) => theme.text}
 `
 
-const Header = () => {
+const Header = ({isDarkMode, themeToggler}) => {
   return (
     <NavHeader>
       <Nav>
         <Logo to="/">Where in the world?</Logo>
-        <Button>
-          <i className="fas fa-moon"></i>
-          <Text>Dark Mode</Text>
+        <Button onClick={themeToggler}>
+          <i className="fas fa-moon" style={{ color: isDarkMode ? 'white' : 'black' }}></i>
+          <Text>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</Text>
         </Button>
       </Nav>
     </NavHeader>

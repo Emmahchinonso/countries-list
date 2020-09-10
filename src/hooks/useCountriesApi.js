@@ -10,6 +10,9 @@ export const useCountriesApi = (initialUrl) => {
 		fetch(initialUrl)
 			.then((response) => response.json())
 			.then((data) => {
+        if(!window.localStorage.getItem('countries')){
+          window.localStorage.setItem('countries', JSON.stringify(data))
+        }
         setCountries(data);
 				setIsLoading(false);
 			})
@@ -17,7 +20,7 @@ export const useCountriesApi = (initialUrl) => {
 				setIsLoading(false);
 				setError(true);
 			});
-	}, [initialUrl]);
+	}, []);
 
 	return [countries, isLoading, error];
 };
