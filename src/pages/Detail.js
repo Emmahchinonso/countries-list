@@ -66,7 +66,7 @@ const DetailInnerContent = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media(max-width: 350px){
+  @media(max-width: 360px){
     flex-direction: column;
   }
 `;
