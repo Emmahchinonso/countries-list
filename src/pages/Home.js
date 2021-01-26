@@ -10,36 +10,24 @@ import { useCountriesApi } from "../hooks/useCountriesApi";
 
 const Home = () => {
 	const [query, setQuery] = useState("");
-	const initialUrl = "https://restcountries.eu/rest/v2/all";
-
-	const [countries, isLoading, error] = useCountriesApi(initialUrl);
-
-	// for selectBox
-	const [option, setOption] = useState("Filter by Region");
-	const [isOpen, setIsOpen] = useState(false);
+	const [countries, isLoading, error, setUrl] = useCountriesApi();
 
 	return (
 		<>
 			<Container>
 				<InputBox query={query} setQuery={setQuery} />
-				<SelectBox
-					option={option}
-					setOption={setOption}
-					isOpen={isOpen}
-					setIsOpen={setIsOpen}
-				/>
+				<SelectBox setUrl={setUrl} />
 			</Container>
 
 			<Countries>
 				{error && <ErrorText>Failed to fetch data...</ErrorText>}
 				<CountriesContainer>
-					{isLoading ? (
-						<Loading />
-					) : (
+					{isLoading && <Loading />}
+
+					{countries &&
 						countries.map((country) => {
 							return <Card country={country} key={country.name} />;
-						})
-					)}
+						})}
 				</CountriesContainer>
 			</Countries>
 		</>

@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-export const useCountriesApi = (initialUrl) => {
+export const useCountriesApi = () => {
 	const [countries, setCountries] = useState([]);
 	const [error, setError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+  const [url, setUrl] = useState("https://restcountries.eu/rest/v2/all")
 
 	useEffect(() => {
 		setIsLoading(true);
-		fetch(initialUrl)
+		fetch(url)
 			.then((response) => response.json())
 			.then((data) => {
-        if(!window.localStorage.getItem('countries')){
-          window.localStorage.setItem('countries', JSON.stringify(data))
-        }
         setCountries(data);
 				setIsLoading(false);
 			})
@@ -22,5 +20,5 @@ export const useCountriesApi = (initialUrl) => {
 			});
 	}, []);
 
-	return [countries, isLoading, error];
+	return [countries, isLoading, error, setUrl];
 };

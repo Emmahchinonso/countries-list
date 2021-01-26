@@ -9,17 +9,18 @@ import RegionResult from "./pages/RegionResult";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./components/Theme";
 
-const setTheme = (isDarkMode, query) => {
+const getTheme = (query) => {
   if(window.localStorage.getItem(query)){
     return window.localStorage.getItem(query);
   }
-  return isDarkMode
+  return false;
 }
 const App = () => {
-	const [isDarkMode, setIsDarkMode] = useState(() => setTheme(false, 'isDarkMode'));
+	const [isDarkMode, setIsDarkMode] = useState(() => getTheme('isDarkMode'));
+
 	const themeToggler = () => {
     setIsDarkMode(!isDarkMode);
-    window.localStorage.setItem('isDarkMode', !isDarkMode)
+    window.localStorage.setItem('isDarkMode', isDarkMode)
 	};
 
 	return (
@@ -29,11 +30,7 @@ const App = () => {
 					<GlobalStyle />
 					<Header isDarkMode={isDarkMode} themeToggler={themeToggler} />
 					<Switch>
-						<Route exact path="/" render={(props) => <Home {...props} />} />
-
-						<Route path="/searchresult/:country" component={SearchResult} />
-
-						<Route path="/regionSearch/:region" component={RegionResult} />
+						<Route exact path="/" component={Home} />
 
 						<Route exact path="/detail/:country" component={Detail} />
 					</Switch>

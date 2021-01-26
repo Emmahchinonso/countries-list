@@ -35,7 +35,7 @@ const Label = styled.label`
 	transition: 0.3s ease;
 	cursor: pointer;
 	&:hover {
-		transform: scale(1.1);
+		transform: translateY(-1rem);
 	}
 `;
 
@@ -46,16 +46,17 @@ const SearchButton = styled.button`
   cursor: pointer;
 `;
 
-const InputBox = ({ query, setQuery }) => {
-  const history = useHistory();
+const InputBox = ({ query, setQuery, setUrl }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setUrl(`https://restcountries.eu/rest/v2/name/${query}?fullText=true`;)
+    setQuery("");
+  }
+
 	return (
 		<InputWrapper>
 			<form
-				onSubmit={(event) => {
-          event.preventDefault();
-          history.push(`/searchresult/${query.toLowerCase()}`);
-					
-				}}
+				onSubmit={handleSubmit}
 			>
 				<Label htmlFor="input">
 					<SearchButton type="submit">

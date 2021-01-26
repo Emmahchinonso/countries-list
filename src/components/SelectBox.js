@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import ListWrapper from "./styled/ListWrapper";
 import ListItem from "./styled/ListItem";
-import { useHistory } from "react-router-dom";
 
 const SelectContainer = styled.div`
 	width: 12rem;
@@ -29,7 +28,7 @@ const SelectedItem = styled.button`
 	cursor: pointer;
 	transition: 0.3s ease;
 	&:hover {
-		transform: scale(1.1);
+		transform: translateY(-1rem);
 	}
 	i {
 		padding-left: 1.1rem;
@@ -49,13 +48,12 @@ const Option = styled(ListItem)`
   transition: 0.5s ease;
   cursor: pointer;
   &:hover {
-    transform: scale(1.1);
+    letter-spacing: .5rem;
 `;
 
 const options = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
 const List = ({ options, setOption, setUrl, isOpen, setIsOpen }) => {
-  const history = useHistory();
 	return (
 		<ListWrapper>
 			{options.map((item, index) => {
@@ -64,9 +62,8 @@ const List = ({ options, setOption, setUrl, isOpen, setIsOpen }) => {
 						key={index}
 						onClick={() => {
 							setOption(item);
-              setIsOpen(!isOpen);
-              history.push(`/regionSearch/${item}`);
-							              
+							setIsOpen(!isOpen);
+							setUrl(`https://restcountries.eu/rest/v2/region/${item}`);
 						}}
 					>
 						{item}
@@ -77,7 +74,10 @@ const List = ({ options, setOption, setUrl, isOpen, setIsOpen }) => {
 	);
 };
 
-const SelectBox = ({ option, setOption, isOpen, setIsOpen, }) => {
+const SelectBox = ({ setUrl }) => {
+	const [isOpen, setIsOpen] = useState(false);
+	const [option, setOption] = useState("Filter by Region");
+
 	return (
 		<SelectContainer>
 			<SelectedItem onClick={() => setIsOpen(!isOpen)}>
@@ -91,6 +91,7 @@ const SelectBox = ({ option, setOption, isOpen, setIsOpen, }) => {
 						setOption={setOption}
 						isOpen={isOpen}
 						setIsOpen={setIsOpen}
+						setUrl={setUrl}
 					/>
 				)}
 			</SelectItemsWrapper>
