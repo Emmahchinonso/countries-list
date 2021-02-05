@@ -37,9 +37,9 @@ const ContentHeader = styled.h3`
 const CountryLink = styled(Link)`
 	text-decoration: none;
   display: block;
-  transition: transform .5s ease;
+  transition: transform .3s ease;
     &:hover {
-      transform: scale(1.05);
+      transform: translateY(-.5rem);
     }
 `;
 
@@ -52,9 +52,9 @@ const ContentList = styled(ListWrapper)``;
 const Card = ({ country }) => {
 	const { flag, name, population, region, capital } = country;
 	return (
-		<CountryLink to={`/detail/${name}`}>
+		<CountryLink to={`/detail/${name.toLowerCase()}`}>
 			<CardWrapper>
-				<Image src={flag} />
+				<Image src={flag}/>
 				<CardContent>
 					<ContentHeader>{name}</ContentHeader>
 					<ContentList>

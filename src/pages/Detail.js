@@ -105,29 +105,44 @@ const Detail = () => {
 	const { country } = useParams();
 	const history = useHistory();
 	const [countries, isLoading, error] = useCountriesApi(
-		`https://restcountries.eu/rest/v2/name/${country}`
+		`https://restcountries.eu/rest/v2/name/${country}?fullText=true`
 	);
+	console.log("detail component rendered");
+	console.log(countries);
+	let name = "",
+		nativeName = "",
+		flag = "",
+		population = "",
+		region = "",
+		subregion = "",
+		capital = "",
+		currencies = [],
+		languages = [],
+		topLevelDomain = "",
+		borders = [];
 
-	const {
-		name,
-		nativeName,
-		flag,
-		population,
-		region,
-		subregion,
-		capital,
-		currencies,
-		languages,
-		topLevelDomain,
-		borders,
-	} = countries;
+	if (countries.length) {
+		({
+			name,
+			nativeName,
+			flag,
+			population,
+			region,
+			subregion,
+			capital,
+			currencies,
+			languages,
+			topLevelDomain,
+			borders,
+		} = countries[0]);
+	}
 
 	return (
 		<>
 			{error && <p>Failed to fetch country</p>}
-			{isLoading ? (
-				<Loading />
-			) : (
+			{isLoading ? <Loading /> : null}
+
+			{countries.length ? (
 				<DetailContainer>
 					<BackButton onClick={() => history.goBack()}>Back</BackButton>
 					<DetailWrapper>
@@ -185,7 +200,7 @@ const Detail = () => {
 						<DetailImage src={flag} alt={`${name} flag`} />
 					</DetailWrapper>
 				</DetailContainer>
-			)}
+			) : null}
 		</>
 	);
 };

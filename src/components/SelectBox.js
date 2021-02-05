@@ -50,7 +50,7 @@ const Option = styled(ListItem)`
   transition: 0.5s ease;
   cursor: pointer;
   &:hover {
-    letter-spacing: .5rem;
+    letter-spacing: .3rem;
 `;
 
 const options = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
