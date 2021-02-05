@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ListWrapper from "./styled/ListWrapper";
 import ListItem from "./styled/ListItem";
@@ -9,9 +9,14 @@ const SelectContainer = styled.div`
 	border-radius: 0.2rem;
 	position: relative;
 	box-shadow: 1px 2px 5px var(--shadow);
-	@media (max-width: 768px) {
-		margin-top: 1rem;
-	}
+  transition: 0.3s ease;
+  
+    &:hover {
+      transform: translateY(-.5rem);
+    }
+    @media (max-width: 768px) {
+      margin-top: 1rem;
+    }
 `;
 
 const SelectedItem = styled.button`
@@ -26,10 +31,7 @@ const SelectedItem = styled.button`
 	width: 100%;
 	margin-top: 0.4rem;
 	cursor: pointer;
-	transition: 0.3s ease;
-	&:hover {
-		transform: translateY(-1rem);
-	}
+	
 	i {
 		padding-left: 1.1rem;
 		font-size: 0.8rem;

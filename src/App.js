@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import Header from "./components/Header";
 import GlobalStyle from "./components/GlobalStyles";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
-import SearchResult from "./pages/SearchResult";
-import RegionResult from "./pages/RegionResult";
+
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./components/Theme";
+import useDarkMode from "./hooks/useDarkMode";
 
-const getTheme = (query) => {
-  if(window.localStorage.getItem(query)){
-    return window.localStorage.getItem(query);
-  }
-  return false;
-}
+
 const App = () => {
-	const [isDarkMode, setIsDarkMode] = useState(() => getTheme('isDarkMode'));
-
-	const themeToggler = () => {
-    setIsDarkMode(!isDarkMode);
-    window.localStorage.setItem('isDarkMode', isDarkMode)
-	};
+	const [isDarkMode, toggleTheme] = useDarkMode();
 
 	return (
 		<Router>
 			<ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
 				<>
 					<GlobalStyle />
-					<Header isDarkMode={isDarkMode} themeToggler={themeToggler} />
+					<Header isDarkMode={isDarkMode} themeToggler={toggleTheme} />
 					<Switch>
 						<Route exact path="/" component={Home} />
 

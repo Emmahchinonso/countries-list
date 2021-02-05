@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-export const useCountriesApi = () => {
+export const useCountriesApi = (api) => {
 	const [countries, setCountries] = useState([]);
 	const [error, setError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-  const [url, setUrl] = useState("https://restcountries.eu/rest/v2/all")
+  const [url, setUrl] = useState(api)
 
 	useEffect(() => {
 		setIsLoading(true);
+    setError(false)
 		fetch(url)
 			.then((response) => response.json())
 			.then((data) => {
@@ -18,7 +19,7 @@ export const useCountriesApi = () => {
 				setIsLoading(false);
 				setError(true);
 			});
-	}, []);
+	}, [url]);
 
 	return [countries, isLoading, error, setUrl];
 };

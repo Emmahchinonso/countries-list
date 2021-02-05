@@ -1,6 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+
+const InputBox = ({ query, setQuery, setUrl }) => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setUrl(`https://restcountries.eu/rest/v2/name/${query}?fullText=true`);
+		setQuery("");
+	};
+
+	return (
+		<InputWrapper>
+			<form onSubmit={handleSubmit}>
+				<Label htmlFor="input">
+					<SearchButton type="submit">
+						<i className="fas fa-search"></i>
+					</SearchButton>
+					<Input
+						id="input"
+						type="text"
+						value={query}
+						placeholder="Search for a country.."
+						onChange={(event) => setQuery(event.target.value.trim())}
+					/>
+				</Label>
+			</form>
+		</InputWrapper>
+	);
+};
 
 const InputWrapper = styled.div`
 	width: 30rem;
@@ -9,11 +35,15 @@ const InputWrapper = styled.div`
 	padding: 1rem;
 	box-shadow: 1px 2px 5px var(--shadow);
 	background: var(--elements-background);
-	i {
-		color: var(--input-color);
-		font-size: 1.1rem;
-		padding: 0.5rem;
-	}
+  transition: 0.3s ease;
+    &:hover {
+      transform: translateY(-.5rem);
+    }
+    i {
+      color: var(--input-color);
+      font-size: 1.1rem;
+      padding: 0.5rem;
+    }
 `;
 
 const Input = styled.input`
@@ -32,47 +62,16 @@ const Input = styled.input`
 const Label = styled.label`
 	width: 100%;
 	display: block;
-	transition: 0.3s ease;
+	
 	cursor: pointer;
-	&:hover {
-		transform: translateY(-1rem);
-	}
+	
 `;
 
 const SearchButton = styled.button`
   border: none;
   background: none;
-  outlineL none;
+  outline: none;
   cursor: pointer;
 `;
-
-const InputBox = ({ query, setQuery, setUrl }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setUrl(`https://restcountries.eu/rest/v2/name/${query}?fullText=true`;)
-    setQuery("");
-  }
-
-	return (
-		<InputWrapper>
-			<form
-				onSubmit={handleSubmit}
-			>
-				<Label htmlFor="input">
-					<SearchButton type="submit">
-						<i className="fas fa-search"></i>
-					</SearchButton>
-					<Input
-						id="input"
-						type="text"
-						value={query}
-						placeholder="Search for a country.."
-						onChange={(event) => setQuery(event.target.value.trim())}
-					/>
-				</Label>
-			</form>
-		</InputWrapper>
-	);
-};
 
 export default InputBox;
