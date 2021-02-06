@@ -107,35 +107,20 @@ const Detail = () => {
 	const [countries, isLoading, error] = useCountriesApi(
 		`https://restcountries.eu/rest/v2/name/${country}?fullText=true`
 	);
-	console.log("detail component rendered");
-	console.log(countries);
-	let name = "",
-		nativeName = "",
-		flag = "",
-		population = "",
-		region = "",
-		subregion = "",
-		capital = "",
-		currencies = [],
-		languages = [],
-		topLevelDomain = "",
-		borders = [];
-
-	if (countries.length) {
-		({
-			name,
-			nativeName,
-			flag,
-			population,
-			region,
-			subregion,
-			capital,
-			currencies,
-			languages,
-			topLevelDomain,
-			borders,
-		} = countries[0]);
-	}
+	
+	const {
+		name,
+		nativeName,
+		flag,
+		population,
+		region,
+		subregion,
+		capital,
+		currencies,
+		languages,
+		topLevelDomain,
+		borders,
+	} = countries[0];
 
 	return (
 		<>
