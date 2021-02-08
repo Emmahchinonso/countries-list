@@ -6,6 +6,12 @@ import { useCountriesApi } from "../hooks/useCountriesApi";
 import Button from "../components/styled/Button";
 import ListItem from "../components/styled/ListItem";
 
+const Error = styled.p`
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+`
+
 const DetailContainer = styled.section`
 	max-width: 95%;
 	padding: 0 1rem 1.5rem;
@@ -124,7 +130,7 @@ const Detail = () => {
 
 	return (
 		<>
-			{error && <p>Failed to fetch country</p>}
+			{error && <Error>Failed to fetch country</Error>}
 			{isLoading ? <Loading /> : null}
 
 			{countries.length ? (
