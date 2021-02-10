@@ -7,10 +7,10 @@ import Button from "../components/styled/Button";
 import ListItem from "../components/styled/ListItem";
 
 const Error = styled.p`
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-`
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2rem;
+`;
 
 const DetailContainer = styled.section`
 	max-width: 95%;
@@ -113,27 +113,45 @@ const Detail = () => {
 	const [countries, isLoading, error] = useCountriesApi(
 		`https://restcountries.eu/rest/v2/name/${country}?fullText=true`
 	);
-	
-	const {
-		name,
-		nativeName,
-		flag,
-		population,
-		region,
-		subregion,
-		capital,
-		currencies,
-		languages,
-		topLevelDomain,
-		borders,
-	} = countries[0];
+
+	let name = "",
+		nativeName = "",
+		flag = "",
+		population = "",
+		region = "",
+		subregion = "",
+		capital = "",
+		currencies = [],
+		languages = [],
+		topLevelDomain = "",
+		borders = [];
+
+	if (countries.length) {
+		[
+			{
+				name,
+				nativeName,
+				flag,
+				population,
+				region,
+				subregion,
+				capital,
+				currencies,
+				languages,
+				topLevelDomain,
+				borders,
+			},
+		] = countries;
+	}
+
+	console.log(countries, isLoading);
 
 	return (
 		<>
 			{error && <Error>Failed to fetch country</Error>}
-			{isLoading ? <Loading /> : null}
-
-			{countries.length ? (
+			{isLoading ? (
+				<Loading />
+			) : (
 				<DetailContainer>
 					<BackButton onClick={() => history.goBack()}>Back</BackButton>
 					<DetailWrapper>
@@ -191,7 +209,7 @@ const Detail = () => {
 						<DetailImage src={flag} alt={`${name} flag`} />
 					</DetailWrapper>
 				</DetailContainer>
-			) : null}
+			)}
 		</>
 	);
 };
